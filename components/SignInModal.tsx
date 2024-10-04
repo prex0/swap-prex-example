@@ -1,4 +1,3 @@
-import { Address, MyCode } from '@prex0/uikit/identity'
 import { CreateWalletButton, RestoreWalletButton } from '@prex0/uikit/wallet'
 import { BaseModal } from './BaseModal'
 import { AiOutlineClose } from 'react-icons/ai'
