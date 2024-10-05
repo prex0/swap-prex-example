@@ -7,7 +7,7 @@
     "type-check": "tsc"
   },
   "dependencies": {
-    "@prex0/uikit": "^0.1.7",
+    "@prex0/uikit": "^0.1.8",
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
