@@ -2,8 +2,8 @@ import { Swap, SwapAmountInput, SwapToggleButton, SwapButton, SwapMessage } from
 
 export const SwapForm = () => {
   return (
-    <div className="p-0">
-      <Swap className="mt-4">
+    <div>
+      <Swap className="mt-3">
         <SwapAmountInput
           label="Sell"
           type='from'
