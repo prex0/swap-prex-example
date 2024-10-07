@@ -10,7 +10,7 @@ export const BaseModal = ({
   onRequestClose,
   children,
   maxWidth,
-  height = 370
+  height = 320
 }: {
   isOpen: boolean
   onRequestClose: () => void
@@ -32,7 +32,6 @@ export const BaseModal = ({
         content: {
           borderRadius: 8,
           backgroundColor: '#ffffff',
-          border: '1px solid #2A2F3B',
           height: height,
           width: '100%',
           maxWidth: maxWidth,

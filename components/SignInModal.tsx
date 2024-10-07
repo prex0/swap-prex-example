@@ -12,7 +12,7 @@ export const SignInModal = ({
 }) => {
   return (
     <BaseModal isOpen={isOpen} onRequestClose={onRequestClose} maxWidth={500}>
-			<div className='p-6 flex justify-between items-center'>
+			<div className='p-4 flex justify-between items-center'>
 				<UILabel1>Sign In</UILabel1>
 				<div className="cursor-pointer">
 					<AiOutlineClose
@@ -22,7 +22,7 @@ export const SignInModal = ({
 				</div>
 			</div>
 
-      <EmbeddedWallet walletCreationComponent={<div className="mt-1 flex justify-center items-center">
+      <EmbeddedWallet walletCreationComponent={<div className="mt-10 flex justify-center items-center">
         <div className='space-y-2'>
             <CreateWalletButton buttonText="Create Wallet"/>
             <RestoreWalletButton buttonText="Restore Wallet" />
@@ -31,9 +31,10 @@ export const SignInModal = ({
       <div className="p-5">
         <div className="flex justify-center items-center">
           <div className="w-80">
-            <div>Login Success</div>
+            <div className="text-center text-gray-800">Login successful!</div>
+            <div className="text-center text-gray-800">Welcome to the Prex demo app!</div>
             <div className="w-full mt-20">
-              <button onClick={onRequestClose} className="bg-zinc-800 text-white px-4 py-2 rounded-md w-full">Close</button>
+              <button onClick={onRequestClose} className="bg-blue-600 text-white px-4 py-2 rounded-md w-full">Close</button>
             </div>
           </div>
         </div>
