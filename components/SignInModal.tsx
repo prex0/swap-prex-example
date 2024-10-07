@@ -28,7 +28,17 @@ export const SignInModal = ({
             <RestoreWalletButton buttonText="Restore Wallet" />
         </div>
       </div>}>
-        <div>Succeeded</div>
+      <div className="p-5">
+        <div className="flex justify-center items-center">
+          <div className="w-80">
+            <div>Login Success</div>
+            <div className="w-full mt-20">
+              <button onClick={onRequestClose} className="bg-zinc-800 text-white px-4 py-2 rounded-md w-full">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       </EmbeddedWallet>
     </BaseModal>
   )
