@@ -1,4 +1,4 @@
-import { CreateWalletButton, RestoreWalletButton } from '@prex0/uikit/wallet'
+import { CreateWalletButton, EmbeddedWallet, RestoreWalletButton } from '@prex0/uikit/wallet'
 import { BaseModal } from './BaseModal'
 import { AiOutlineClose } from 'react-icons/ai'
 import { UILabel1 } from '@prex0/uikit'
@@ -22,12 +22,14 @@ export const SignInModal = ({
 				</div>
 			</div>
 
-      <div className="mt-1 flex justify-center items-center">
+      <EmbeddedWallet walletCreationComponent={<div className="mt-1 flex justify-center items-center">
         <div className='space-y-2'>
-        <CreateWalletButton buttonText="Create Wallet" />
-          <RestoreWalletButton buttonText="Restore Wallet" />
+            <CreateWalletButton buttonText="Create Wallet"/>
+            <RestoreWalletButton buttonText="Restore Wallet" />
         </div>
-      </div>
+      </div>}>
+        <div>Succeeded</div>
+      </EmbeddedWallet>
     </BaseModal>
   )
 }
