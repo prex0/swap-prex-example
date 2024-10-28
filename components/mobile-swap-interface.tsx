@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from "react"
 import { ChevronDown, Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -25,16 +23,7 @@ import { Swap, SwapAmountForm, SwapTokenSelector, SwapToggleButton, SwapMessage,
 import { AmountFormInput, AmountFormMaxButton } from "@prex0/uikit"
 import { Token } from "@prex0/prex-client"
 
-const tokens = [
-  { symbol: "ETH", name: "Ethereum", icon: "🔹" },
-  { symbol: "USDC", name: "USD Coin", icon: "💲" },
-  { symbol: "DAI", name: "Dai", icon: "🟨" },
-  { symbol: "WBTC", name: "Wrapped Bitcoin", icon: "🟠" },
-]
-
 export default function Component() {
-  const [fromToken, setFromToken] = useState(tokens[0])
-  const [toToken, setToToken] = useState(null)
   const [isSignInOpen, setIsSignInOpen] = useState(false)
 
   return (
