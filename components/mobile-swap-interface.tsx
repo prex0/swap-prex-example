@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { ChevronDown, Menu, X } from "lucide-react"
+import { ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import {
@@ -19,9 +19,10 @@ import {
 } from "@/components/ui/dialog"
 import { CreateWalletButton, EmbeddedWallet, RestoreWalletButton } from '@prex0/uikit/wallet'
 import { Address, MyCode } from "@prex0/uikit/identity"
-import { Swap, SwapAmountForm, SwapTokenSelector, SwapToggleButton, SwapMessage, SwapButton } from "@prex0/uikit/swap"
-import { AmountFormInput, AmountFormMaxButton } from "@prex0/uikit"
+import { Swap, SwapAmountForm, SwapTokenSelector, SwapToggleButton, SwapMessage, SwapButton, SwapBalance } from "@prex0/uikit/swap"
+import { AmountFormBalance, AmountFormInput, AmountFormMaxButton } from "@prex0/uikit"
 import { Token } from "@prex0/prex-client"
+import { USDC_TOKEN, WETH_TOKEN } from "../constants"
 
 export default function Component() {
   const [isSignInOpen, setIsSignInOpen] = useState(false)
@@ -52,15 +53,16 @@ export default function Component() {
                 </DialogHeader>
                 <div className="flex flex-col items-center">
                   <EmbeddedWallet walletCreationComponent={<div>
-                    <CreateWalletButton buttonText="Create Wallet" >
-                      <Button >Create New Wallet</Button>
+                    <div className="flex flex-col items-center space-y-2">
+                    <CreateWalletButton buttonText="Create Wallet" className="w-40">
+                      <Button className="w-full">Create New Wallet</Button>
                     </CreateWalletButton>
-                    <RestoreWalletButton buttonText="Restore Wallet" >
-                      <Button >Already have a wallet?</Button>
+                    <RestoreWalletButton buttonText="Restore Wallet" className="w-40">
+                      <Button className="w-full" variant="outline">Already have a wallet?</Button>
                     </RestoreWalletButton>
+                    </div>
                   </div>}>
                     <div className="flex flex-col items-center">
-
                       <MyCode />
                     </div>
                     <Address isSliced={false} />
@@ -81,32 +83,27 @@ export default function Component() {
               anywhere.
             </h1>
             <div className="space-y-4">
-              <div className="bg-white rounded-xl p-4 shadow-md">
-                <div className="flex justify-between items-center mb-2">
-                  <span className="text-gray-400">Sell</span>
-                  <span className="text-gray-400">$0</span>
-                </div>
-                <div className="flex items-center">
-                  <SwapAmountForm type="from" amount="0">
-                    <AmountFormInput >
-                      <Input
-                        type="number"
-                        placeholder="0"
-                        className="bg-transparent text-4xl font-bold text-gray-800 border-none focus:outline-none focus:ring-0 w-full"
-                      />
-                    </AmountFormInput>
-                    <SwapTokenSelector type="from">
-                      <TokenSelector />
-                    </SwapTokenSelector>
+              <SwapAmountForm type="from" amount="0">
+                <div className="bg-white rounded-xl p-4 shadow-md">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-gray-400">Sell</span>
+                    <span className="text-gray-400 flex justify-end items-center">
+                      <AmountFormBalance />
+                      <AmountFormMaxButton className="w-10" />
+                    </span>
+                  </div>
+                  <div className="flex items-center">
+                      <AmountFormInput className="bg-transparent text-4xl font-bold text-gray-800 border-none outline-none focus:ring-0 w-full appearance-none" />
+                      <SwapTokenSelector type="from" token={USDC_TOKEN}>
+                        <TokenSelector />
+                      </SwapTokenSelector>
 
-                  </SwapAmountForm>
+                  </div>
                 </div>
-              </div>
+              </SwapAmountForm>
               <div className="flex justify-center">
-                <SwapToggleButton>
-                  <Button variant="ghost" size="icon" className="rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300">
-                    <ChevronDown className="h-6 w-6" />
-                  </Button>
+                <SwapToggleButton className="rounded-full bg-gray-200 text-gray-600 hover:bg-gray-300">
+                  <ChevronDown className="h-6 w-6" />
                 </SwapToggleButton>
               </div>
               <div className="bg-white rounded-xl p-4 shadow-md">
@@ -115,21 +112,15 @@ export default function Component() {
                 </div>
                 <div className="flex items-center">
                   <SwapAmountForm type="to" amount="0">
-                    <AmountFormInput>
-                      <Input
-                        type="number"
-                        placeholder="0"
-                        className="bg-transparent text-4xl font-bold text-gray-800 border-none focus:outline-none focus:ring-0 w-full"
-                        readOnly
-                      />
-                    </AmountFormInput>
-                    <SwapTokenSelector type="to">
+                    <AmountFormInput className="bg-transparent text-4xl font-bold text-gray-800 border-none focus:outline-none focus:ring-0 w-full" />
+                    <SwapTokenSelector type="to" token={WETH_TOKEN}>
                       <TokenSelector />
                     </SwapTokenSelector>
                   </SwapAmountForm>
                 </div>
               </div>
             </div>
+            <SwapMessage />
             <SwapButton>
               <CustomButton>
                 Swap
