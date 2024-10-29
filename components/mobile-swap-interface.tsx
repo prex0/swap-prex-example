@@ -154,7 +154,7 @@ export function TokenSelector({
 
   return (
     <Select value={token?.symbol} onValueChange={(value) => setToken(options.find((t) => t.symbol === value)!)} disabled={disabled}>
-      <SelectTrigger className="w-28 border-none bg-gray-100 text-gray-800">
+      <SelectTrigger className="w-[128px] border-none bg-gray-100 text-gray-800">
         <SelectValue placeholder="Select token" />
       </SelectTrigger>
       <SelectContent className="bg-white text-gray-800">
