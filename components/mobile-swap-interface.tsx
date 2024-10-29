@@ -48,7 +48,7 @@ export default function Component() {
                 <DialogHeader>
                   <DialogTitle>Sign in</DialogTitle>
                   <DialogDescription>
-                    Supports Arbitrum.
+                    Create a new passkey wallet on Arbitrum.
                   </DialogDescription>
                 </DialogHeader>
                 <div className="flex flex-col items-center">
@@ -75,6 +75,10 @@ export default function Component() {
       </header>
 
       <main className="flex-grow flex flex-col items-center justify-center p-4">
+        <div className="my-1 text-sm">
+          Do you have MetaMask?
+          Please try the <a href="https://app.predy.finance" className="underline">Predy App</a>.
+        </div>
         <Swap>
           <div className="w-full max-w-md space-y-6">
             <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
