@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -22,6 +21,8 @@ import { Swap, SwapAmountForm, SwapTokenSelector, SwapToggleButton, SwapMessage,
 import { AmountFormBalance, AmountFormInput, AmountFormMaxButton } from "@prex0/uikit"
 import { Token } from "@prex0/prex-client"
 import { USDC_TOKEN, WETH_TOKEN } from "../constants"
+import { Toaster } from "@/components/ui/toaster"
+import { useToast } from "@/hooks/use-toast"
 
 export default function Component() {
   return (
@@ -96,6 +97,7 @@ export default function Component() {
           </div>
         </Swap>
       </main>
+      <Toaster />
     </div>
   )
 }
@@ -136,6 +138,8 @@ export function TokenSelector({
 
 
 function SignInButton({ className }: { className: string }) {
+  const { toast } = useToast()
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -166,7 +170,7 @@ function SignInButton({ className }: { className: string }) {
         <div className="flex flex-col items-center">
           <MyCode />
         </div>
-        <Address isSliced={false} />
+        <Address isSliced={false} onCopied={() => toast({ title: "Copied address to clipboard" })}/>
       </EmbeddedWallet>
     </div>
   </DialogContent>
