@@ -24,8 +24,6 @@ import { Token } from "@prex0/prex-client"
 import { USDC_TOKEN, WETH_TOKEN } from "../constants"
 
 export default function Component() {
-  const [isSignInOpen, setIsSignInOpen] = useState(false)
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-100 via-purple-100 to-violet-100 flex flex-col">
       <header className="w-full bg-white shadow-md p-4">
@@ -35,40 +33,7 @@ export default function Component() {
             <span className="text-xl font-semibold text-gray-800">SwapApp</span>
           </div>
           <div className="flex items-center space-x-4">
-            <Dialog open={isSignInOpen} onOpenChange={setIsSignInOpen}>
-              <DialogTrigger asChild>
-                <Button variant="outline" className="text-gray-600 border-gray-300">
-                  <EmbeddedWallet walletCreationComponent={<div>Sign in</div>}>
-                    <Address />
-                  </EmbeddedWallet>
-                </Button>
-              </DialogTrigger>
-              <DialogContent className="sm:max-w-[425px]">
-                <DialogHeader>
-                  <DialogTitle>Sign in</DialogTitle>
-                  <DialogDescription>
-                    Create a new passkey wallet on Arbitrum.
-                  </DialogDescription>
-                </DialogHeader>
-                <div className="flex flex-col items-center">
-                  <EmbeddedWallet walletCreationComponent={<div>
-                    <div className="flex flex-col items-center space-y-2">
-                    <CreateWalletButton buttonText="Create Wallet" className="w-40">
-                      <Button className="w-full">Create New Wallet</Button>
-                    </CreateWalletButton>
-                    <RestoreWalletButton buttonText="Restore Wallet" className="w-40">
-                      <Button className="w-full" variant="outline">Already have a wallet?</Button>
-                    </RestoreWalletButton>
-                    </div>
-                  </div>}>
-                    <div className="flex flex-col items-center">
-                      <MyCode />
-                    </div>
-                    <Address isSliced={false} />
-                  </EmbeddedWallet>
-                </div>
-              </DialogContent>
-            </Dialog>
+            <SignInButton className="w-full text-gray-600 border-gray-300" />
           </div>
         </div>
       </header>
@@ -92,11 +57,13 @@ export default function Component() {
                     <span className="text-gray-400">Sell</span>
                     <span className="text-gray-400 flex justify-end items-center">
                       <AmountFormBalance />
-                      <AmountFormMaxButton className="w-10" />
+                      <AmountFormMaxButton className="w-10" asChild>
+                        <span className="text-gray-400 cursor-pointer">Max</span>
+                      </AmountFormMaxButton>
                     </span>
                   </div>
                   <div className="flex items-center">
-                    <AmountFormInput className="bg-transparent text-4xl font-bold text-gray-800 border-none outline-none focus:ring-0 w-full appearance-none" />
+                    <AmountFormInput className="bg-transparent text-4xl font-bold text-gray-800 border-none outline-none shadow-none focus:ring-0 w-full appearance-none" />
                     <SwapTokenSelector type="from" token={USDC_TOKEN}>
                       <TokenSelector />
                     </SwapTokenSelector>
@@ -114,7 +81,7 @@ export default function Component() {
                 </div>
                 <div className="flex items-center">
                   <SwapAmountForm type="to" amount="0">
-                    <AmountFormInput className="bg-transparent text-4xl font-bold text-gray-800 border-none focus:outline-none focus:ring-0 w-full" />
+                    <AmountFormInput className="bg-transparent text-4xl font-bold text-gray-800 border-none outline-none shadow-none focus:outline-none focus:ring-0 w-full" />
                     <SwapTokenSelector type="to" token={WETH_TOKEN}>
                       <TokenSelector />
                     </SwapTokenSelector>
@@ -123,7 +90,9 @@ export default function Component() {
               </div>
             </div>
             <SwapMessage />
-            <SwapButton className="w-full bg-purple-500 hover:bg-purple-600 text-white text-lg py-6 rounded-xl shadow-lg">Swap</SwapButton>
+            <EmbeddedWallet walletCreationComponent={<SignInButton className="w-full bg-purple-500 hover:bg-purple-600 text-white text-lg py-6 rounded-xl shadow-lg"/>}>
+              <SwapButton className="w-full bg-purple-500 hover:bg-purple-600 text-white text-lg py-6 rounded-xl shadow-lg">Swap</SwapButton>
+            </EmbeddedWallet>
           </div>
         </Swap>
       </main>
@@ -163,4 +132,43 @@ export function TokenSelector({
       </SelectContent>
     </Select>
   );
+}
+
+
+function SignInButton({ className }: { className: string }) {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline" className={className}>
+      <EmbeddedWallet walletCreationComponent={<div>Sign in</div>}>
+        <Address />
+      </EmbeddedWallet>
+    </Button>
+  </DialogTrigger>
+  <DialogContent className="sm:max-w-[425px]">
+    <DialogHeader>
+      <DialogTitle>Sign in</DialogTitle>
+      <DialogDescription>
+        Create a new passkey wallet on Arbitrum.
+      </DialogDescription>
+    </DialogHeader>
+    <div className="flex flex-col items-center">
+      <EmbeddedWallet walletCreationComponent={<div>
+        <div className="flex flex-col items-center space-y-2">
+        <CreateWalletButton buttonText="Create Wallet" className="w-40">
+          <Button className="w-full">Create New Wallet</Button>
+        </CreateWalletButton>
+        <RestoreWalletButton buttonText="Restore Wallet" className="w-40">
+          <Button className="w-full" variant="outline">Already have a wallet?</Button>
+        </RestoreWalletButton>
+        </div>
+      </div>}>
+        <div className="flex flex-col items-center">
+          <MyCode />
+        </div>
+        <Address isSliced={false} />
+      </EmbeddedWallet>
+    </div>
+  </DialogContent>
+</Dialog>)
 }
