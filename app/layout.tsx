@@ -25,7 +25,7 @@ export default function RootLayout({
           policyId={process.env.NEXT_PUBLIC_POLICY_ID}
           apiKey={process.env.NEXT_PUBLIC_API_KEY}
           tokens={TOKEN_LIST}
-          //dryRun={process.env.NEXT_PUBLIC_DRY_RUN === "true"}
+          dryRun={process.env.NEXT_PUBLIC_DRY_RUN === "true"}
         >
           {children}
         </PrexUIKitProvider>

@@ -1,7 +1,6 @@
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import {
   Select,
   SelectContent,
@@ -97,11 +96,10 @@ export default function Component() {
                     </span>
                   </div>
                   <div className="flex items-center">
-                      <AmountFormInput className="bg-transparent text-4xl font-bold text-gray-800 border-none outline-none focus:ring-0 w-full appearance-none" />
-                      <SwapTokenSelector type="from" token={USDC_TOKEN}>
-                        <TokenSelector />
-                      </SwapTokenSelector>
-
+                    <AmountFormInput className="bg-transparent text-4xl font-bold text-gray-800 border-none outline-none focus:ring-0 w-full appearance-none" />
+                    <SwapTokenSelector type="from" token={USDC_TOKEN}>
+                      <TokenSelector />
+                    </SwapTokenSelector>
                   </div>
                 </div>
               </SwapAmountForm>
@@ -125,11 +123,7 @@ export default function Component() {
               </div>
             </div>
             <SwapMessage />
-            <SwapButton>
-              <CustomButton>
-                Swap
-              </CustomButton>
-            </SwapButton>
+            <SwapButton className="w-full bg-purple-500 hover:bg-purple-600 text-white text-lg py-6 rounded-xl shadow-lg">Swap</SwapButton>
           </div>
         </Swap>
       </main>
@@ -169,12 +163,4 @@ export function TokenSelector({
       </SelectContent>
     </Select>
   );
-}
-
-function CustomButton({ disabled, isLoading, onClick, children }: { disabled?: boolean, isLoading?: boolean, onClick?: () => void, children: React.ReactNode }) {
-  return <Button
-    className="w-full bg-purple-500 hover:bg-purple-600 text-white text-lg py-6 rounded-xl shadow-lg"
-    disabled={disabled}
-    onClick={onClick}
-  >{isLoading ? 'Loading...' : children}</Button>
 }
